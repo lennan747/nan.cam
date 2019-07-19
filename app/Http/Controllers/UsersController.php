@@ -13,7 +13,7 @@ class UsersController extends Controller
      * 除去show动作，全部走auth中间件
      * UsersController constructor.
      */
-    function __construct()
+    public function __construct()
     {
         $this->middleware('auth', ['except' => ['show']]);
     }
