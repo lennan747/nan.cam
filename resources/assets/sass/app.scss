@@ -1,16 +1,14 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 // Variables
 @import "variables";
-
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 /* universal */
 
 body {
-  font-family: Hiragino Sans GB, "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial,sans-serif;
+  font-family: Hiragino Sans GB, "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial, sans-serif;
 }
 
 /* header */
@@ -22,13 +20,27 @@ body {
   border-top: 4px solid #00b5ad;
   margin-bottom: 40px;
   margin-top: 0px;
+
+  .dropdown-menu {
+    padding: 0px;
+
+    li a {
+      border-bottom: 1px solid #d8d8d8;
+      line-height: 2.4;
+
+      .glyphicon {
+        margin-right: 8px;
+      }
+    }
+  }
 }
 
 /* Sticky footer styles */
 html {
   position: relative;
-  min-height: 100% ;
+  min-height: 100%;
 }
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
@@ -37,7 +49,7 @@ body {
 .footer {
   position: absolute;
   bottom: 0;
-  width: 100% ;
+  width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #000;
@@ -75,24 +87,62 @@ body {
       padding: 5px 14px;
       font-size: 0.9em;
     }
+
     a {
       color: #444444;
     }
+
     .meta {
-      font-size:0.9em;
+      font-size: 0.9em;
       color: #b3b3b3;
+
       a {
         color: #b3b3b3;
       }
     }
+
     .badge {
       background-color: #d8d8d8;
     }
+
     hr {
       margin-top: 12px;
       margin-bottom: 12px;
       border: 0;
       border-top: 1px solid #dcebf5;
     }
+  }
+}
+
+/* User profile page */
+.users-show-page {
+  .user-info {
+    .thumbnail {
+      margin-bottom: 0px;
+    }
+  }
+
+  .nav-tabs {
+    margin-bottom: 20px;
+
+    >li.active > a {
+      background-color: #fff;
+    }
+  }
+
+  .list-group {
+    .list-group-item {
+      border: none;
+      margin-bottom: 0px;
+      border-bottom: 1px solid #efefef;
+
+      .meta {
+        color: #b3b3b3;
+      }
+    }
+  }
+
+  .pagination {
+    margin: 12px 0;
   }
 }
