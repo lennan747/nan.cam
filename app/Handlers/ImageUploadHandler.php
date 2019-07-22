@@ -2,12 +2,19 @@
 
 namespace App\Handlers;
 
-use Image;
+use Intervention\Image\Facades\Image;
 
 class ImageUploadHandler
 {
     protected $allowed_ext = ["png", "jpg", "gif", 'jpeg'];
 
+    /**
+     * @param $file
+     * @param $folder
+     * @param $file_prefix
+     * @param bool $max_width
+     * @return array|bool
+     */
     public function save($file, $folder, $file_prefix, $max_width = false)
     {
         // 构建存储的文件夹规则，值如：uploads/images/avatars/201709/21/
@@ -45,6 +52,11 @@ class ImageUploadHandler
         ];
     }
 
+    /**
+     * 裁剪图片到指定大小
+     * @param $file_path
+     * @param $max_width
+     */
     public function reduceSize($file_path, $max_width)
     {
         // 先实例化，传参是文件的磁盘物理路径
