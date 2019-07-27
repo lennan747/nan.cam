@@ -1,0 +1,36 @@
+<?php
+
+return [
+    'timeout' => 5.0,
+    // 默认发送配置
+    'default' => [
+        // 网关调用策略，默认：顺序调用
+        'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
+
+        // 默认可用的发送网关
+        'gateways' => [
+            'qcloud',
+            'yunpian',
+            'aliyun',
+        ],
+    ],
+    // 可用的网关配置
+    'gateways' => [
+        'errorlog' => [
+            'file' => '/tmp/easy-sms.log',
+        ],
+        'qcloud' => [
+            'sdk_app_id' => env('QCLOUD_SDK_APP_ID'), // SDK APP ID
+            'app_key' => env('QCLOUD_APP_KEY'), // APP KEY
+            'sign_name' => env('QCLOUD_SIGN_NAME'), // 短信签名，如果使用默认签名，该字段可缺省（对应官方文档中的sign）
+        ],
+        'yunpian' => [
+            'api_key' => env('YUNPIAN_API_KEY'),
+        ],
+        'aliyun' => [
+            'access_key_id' => env('ALIYUN_ACCESS_KEY_ID'),
+            'access_key_secret' => env('ALIYUN_ACCESS_KEY_SECRET'),
+            'sign_name' => env('ALIYUN_SIGN_NAME'),
+        ],
+    ],
+];
