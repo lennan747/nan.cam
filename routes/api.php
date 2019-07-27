@@ -32,17 +32,19 @@ $api = app('Dingo\Api\Routing\Router');
 //    });
 //});
 
-$api->version('v1',[
+$api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api'
-],function ($api){
+], function ($api) {
     $api->group([
         'middleware' => 'api.throttle',
-        'limit'      => config('api.rate_limits.sign.limit'),
-        'expires'    => config('api.rate_limits.sign.expires'),
-    ],function ($api){
+        'limit' => config('api.rate_limits.sign.limit'),
+        'expires' => config('api.rate_limits.sign.expires'),
+    ], function ($api) {
         // 生成，发送验证码
-        $api->post('verificationCodes','VerificationCodesController@store')->name('api.verificationCodes.store');
+        $api->post('verificationCodes', 'VerificationCodesController@store')->name('api.verificationCodes.store');
         // 注册用户
-        $api->post('users','UsersController@store')->name('api.users.store');
+        $api->post('users', 'UsersController@store')->name('api.users.store');
+        // 图片验证码
+        $api->post('captchas', 'CaptchasController@store')->name('api.captchas.store');
     });
 });
