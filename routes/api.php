@@ -54,5 +54,11 @@ $api->version('v1', [
         $api->put('authorizations/current','AuthorizationsController@update')->name('api.authorizations.update');
         // 删除token
         $api->delete('authorizations/current','AuthorizationsController@destroy')->name('api.authorizations.destroy');
+
+
+        // 需要token
+        $api->group(['middleware' => 'api.auth'],function ($api){
+            $api->get('user', 'UsersController@me')->name('api.user.show');
+        });
     });
 });

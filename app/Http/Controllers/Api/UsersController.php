@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\UserRequest;
+use App\Transformers\UserTransformer;
 
 class UsersController extends Controller
 {
@@ -30,5 +31,10 @@ class UsersController extends Controller
         \Cache::forget($userRequest->verification_key);
 
         return $this->response->created();
+    }
+
+    public function me()
+    {
+        return $this->response->item($this->user(), new UserTransformer());
     }
 }
