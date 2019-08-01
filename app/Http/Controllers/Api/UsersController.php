@@ -6,10 +6,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\UserRequest;
 use App\Transformers\UserTransformer;
+use App\Models\Image;
 
 class UsersController extends Controller
 {
-    //
+
     public function store(UserRequest $userRequest)
     {
         $verifyData = \Cache::get($userRequest->verification_key);
@@ -31,6 +32,7 @@ class UsersController extends Controller
         \Cache::forget($userRequest->verification_key);
 
         //return $this->response->created();
+        // 创建成功，返回TOKEN
         return $this->response->item($user,new UserTransformer())->setMeta([
             'access_token' => \Auth::guard('api')->fromUser($user),
             'token_type' => 'Bearer',
@@ -41,5 +43,21 @@ class UsersController extends Controller
     public function me()
     {
         return $this->response->item($this->user(), new UserTransformer());
+    }
+
+    public function update(UserRequest $userRequest)
+    {
+        $user = $this->user();
+
+        $attributes = $userRequest->only(['name', 'email', 'introduction']);
+
+        if ($userRequest->avatar_image_id) {
+            $image = Image::find($userRequest->avatar_image_id);
+
+            $attributes['avatar'] = $image->path;
+        }
+
+        $user->update($attributes);
+        return $this->response->item($user, new UserTransformer());
     }
 }

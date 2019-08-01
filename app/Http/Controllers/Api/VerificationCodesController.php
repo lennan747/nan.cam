@@ -13,12 +13,13 @@ class VerificationCodesController extends Controller
     public function store(VerificationCodeRequest $request, EasySms $easySms)
     {
         // $phone = $request->phone;
+        // 从缓存中获取图片验证码信息
         $captchaData = \Cache::get($request->captcha_key);
-
+        // 不存在
         if (!$captchaData) {
             return $this->response->error('图片验证码已失效',422);
         }
-
+        // 防止时序攻击，验证码错误
         if (!hash_equals($captchaData['code'],$request->captcha_code))
         {
             // 验证码错误就清楚缓存
@@ -28,6 +29,7 @@ class VerificationCodesController extends Controller
 
         $phone = $captchaData['phone'];
 
+        // 开发环境返回6789，线上环境通过第三方短信平台发送短信
         if (!app()->environment('production')) {
             $code = '6789';
         } else {

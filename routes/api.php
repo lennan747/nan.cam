@@ -59,7 +59,12 @@ $api->version('v1', [
 
         // 需要token
         $api->group(['middleware' => 'api.auth'],function ($api){
+            // 当前登录用户的用户信息
             $api->get('user', 'UsersController@me')->name('api.user.show');
+            // 编辑用户信息
+            $api->patch('user','UsersController@update')->name('api.user.update');
+            // 图片资源
+            $api->post('images','ImagesController@store')->name('api.images.store');
         });
     });
 });

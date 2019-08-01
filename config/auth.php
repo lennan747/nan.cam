@@ -41,6 +41,7 @@ return [
             'provider' => 'users',
         ],
 
+        // API 用户授权方式 JWT
         'api' => [
             'driver' => 'jwt',
             'provider' => 'users',
