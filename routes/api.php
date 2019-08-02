@@ -61,6 +61,8 @@ $api->version('v1', [
         $api->get('topics','TopicsController@index')->name('api.topics.index');
         // 用户话题列表
         $api->get('users/{user}/topics','TopicsController@userIndex')->name('api.users.topics.index');
+        // 话题详情
+        $api->get('topics/{topics}','TopicsController@show')->name('api.topics.show');
 
 
         // 需要token
