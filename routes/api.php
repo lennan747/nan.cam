@@ -57,6 +57,10 @@ $api->version('v1', [
         $api->delete('authorizations/current','AuthorizationsController@destroy')->name('api.authorizations.destroy');
         // 话题分类
         $api->get('categories','CategoriesController@index')->name('api.categories.index');
+        // 话题列表
+        $api->get('topics','TopicsController@index')->name('api.topics.index');
+        // 用户话题列表
+        $api->get('users/{user}/topics','TopicsController@userIndex')->name('api.users.topics.index');
 
 
         // 需要token
