@@ -5,11 +5,19 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\ReplyRequest;
 use App\Models\Reply;
 use App\Models\Topic;
+use App\Models\User;
 use App\Transformers\ReplyTransformer;
 
 
 class RepliesController extends Controller
 {
+    public function index(Topic $topic)
+    {
+        $replies = $topic->replies()->paginate(20);
+
+        return $this->response->paginator($replies, new ReplyTransformer());
+    }
+
     //
     public function store(ReplyRequest $request, Reply $reply, Topic $topic)
     {
@@ -31,5 +39,11 @@ class RepliesController extends Controller
         $reply->delete();
 
         return $this->response->noContent();
+    }
+    public function userIndex(User $user)
+    {
+        $replies = $user->replies()->paginate(20);
+
+        return $this->response->paginator($replies, new ReplyTransformer());
     }
 }

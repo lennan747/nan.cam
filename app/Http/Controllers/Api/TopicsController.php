@@ -41,8 +41,7 @@ class TopicsController extends Controller
         $topic->user_id = $this->user()->id;
         $topic->save();
 
-        return $this->response->item($topic, new TopicTransformer())
-            ->setStatusCode(201);
+        return $this->response->item($topic, new TopicTransformer())->setStatusCode(201);
     }
 
     public function update(TopicRequest $request,Topic $topic)
