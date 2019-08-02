@@ -64,7 +64,6 @@ $api->version('v1', [
         // 话题详情
         $api->get('topics/{topics}','TopicsController@show')->name('api.topics.show');
 
-
         // 需要token
         $api->group(['middleware' => 'api.auth'],function ($api){
             // 当前登录用户的用户信息
@@ -79,6 +78,8 @@ $api->version('v1', [
             $api->patch('topics/{topic}', 'TopicsController@update')->name('api.topics.update');
             // 删除话题
             $api->delete('topics/{topic}', 'TopicsController@destroy')->name('api.topics.destroy');
+            // 发布回复
+            $api->post('topics/{topic}/replies', 'RepliesController@store')->name('api.topics.replies.store');
         });
     });
 });

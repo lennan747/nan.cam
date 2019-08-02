@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-use Dingo\Api\Http\FormRequest;
+//use Dingo\Api\Http\FormRequest;
 
 class AuthorizationRequest extends FormRequest
 {
